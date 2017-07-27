@@ -1,11 +1,9 @@
-// CP/Slave
+// CP/Worker
 
 #include <Wire.h>
 #include <Adafruit_CircuitPlayground.h>
 
-byte tempData;
-byte lightData;
-byte byteArr[2];
+char wireData[6];
 
 void setup() {
   Serial.begin(9600);
@@ -14,22 +12,17 @@ void setup() {
 }
 
 void loop() {
-  tempData = (int) CircuitPlayground.temperature();
-  lightData = (int) CircuitPlayground.lightSensor();
-  byteArr[0] = tempData;
-  byteArr[1] = lightData;
-  
-  Serial.print(tempData);
-  Serial.print(" ");
-  Serial.println(lightData);
-  delay(60000);
+  int tempData = (int) CircuitPlayground.temperature();
+  int lightData = (int) CircuitPlayground.lightSensor();
+  String data = "";
+  data += tempData;
+  data += " ";
+  data += lightData;
+  data += " ";
+  data.toCharArray(wireData, 6); 
+  delay(10000);
 }
 
 void requestEvent() {
-  /*Wire.write(tempData);
-  Wire.write(",");
-  Wire.write(lightData);
-  Wire.write(",");*/
-  Wire.write("20");
-  Wire.write("21");
+  Wire.write(wireData);
 }

@@ -8,12 +8,12 @@ void setup() {
 }
 
 void loop() {
-  Wire.requestFrom(8, 2);
+  Wire.requestFrom(8, 5);
 
   while (Wire.available()) {
     char c = Wire.read();
     Serial.print(c);
   }
 
-  delay(500);
+  delay(25000);
 }
