@@ -2,9 +2,18 @@ fetch('../data')
   .then(response => response.json())
   .then(jsonData => {
     if (jsonData.temperature && jsonData.light)
-      updateView(jsonData.temperature, jsonData.light);
+      updateDataView(jsonData.temperature, jsonData.light);
   })
-  .catch(() => console.log('Fetch error'));
+  .catch(() => console.log('/data Fetch error'));
+
+
+fetch('../record')
+  .then(response => response.json())
+  .then(jsonData => {
+    if (jsonData.temperature && jsonData.light)
+      updateRecordView(jsonData.temperature, jsonData.light);
+  })
+  .catch(() => console.log('/record Fetch error'));
 
 
 const intensity = 255; // how not-black should the colours be
@@ -31,13 +40,17 @@ function temperatureToColour(temperature) {
 }
 
 
-function updateView(temperature, light) {
+function updateDataView(temperature, light) {
   document.getElementById('temperature').innerHTML = temperature;
   document.getElementById('light').innerHTML = light;
 
   //'linear-gradient(red, #f06d06)';
   document.getElementsByTagName('body')[0].style.backgroundImage =
     `linear-gradient(${dayLightToColour(light)}, ${temperatureToColour(temperature)})`;
+}
+
+function updateRecordView(temperature, light) {
+  document.getElementById('record').innerHTML = `Record: ${temperature}&deg;C | ${light}au`;
 }
 
 // Todo: will need a function that properly calculates gradient in colour.
