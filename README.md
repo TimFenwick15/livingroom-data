@@ -5,10 +5,17 @@ This is a project to display temperature and light data from my living room over
 - The ESP8266 will then POST this to a NodeJS server, eventually hosted on Heroku
 - The NodeJS Heroku server will also host a client web page to display the data
 
-To Run:
+To run the client:
 - Run $ npm start
 - Go to http://localhost in a browser
 - Run $ node postTest.js to load some test data
+
+To run the Arduino code:
+- Create arduino/worker/credentials.h
+- Write to it (replacing the wifi name and password:
+  #define WIFI_NAME "<wifi-name>"
+  #define WIFI_PASSWORD "<wifi-password>"
+- Use the Arduino IDE to compile and upload the code
 
 Learns/Problems
 

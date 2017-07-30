@@ -1,6 +1,7 @@
 // ESP/Master
 
 #include <Wire.h>
+#include "credentials.h"
 
 void setup() {
   Wire.begin();
@@ -15,6 +16,7 @@ void loop() {
   }
 
   delay(25000);
+  Serial.println(WIFI_PASSWORD);
 }
 
 /*
