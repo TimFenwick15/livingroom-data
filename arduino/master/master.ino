@@ -1,11 +1,24 @@
 // ESP/Master
 
 #include <Wire.h>
+#include <ESP8266WiFi.h>
 #include "credentials.h"
 
 void setup() {
-  Wire.begin();
   Serial.begin(9600);
+  while (!Serial)
+    delay(50);
+
+  WiFi.begin(WIFI_NAME, WIFI_PASSWORD);
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.println(WiFi.status());
+    delay(500);
+  }
+
+  Serial.println("connected");
+  
+  Wire.begin();
 }
 
 void loop() {
@@ -14,48 +27,23 @@ void loop() {
     char c = Wire.read();
     Serial.print(c);
   }
-
-  delay(25000);
-  Serial.println(WIFI_PASSWORD);
-}
-
-/*
-#include <ESP8266WiFi.h>
-const char* ssid     = "<wifi name>";
-const char* password = "<wifi password>";
-const char* host     = "<server>";
-const int httpPort   = 8080;
-
-void setup() {
-
-
-  while (WiFi.status() != WL_CONNECTED) {
-  delay(500);
-  Serial.print(".");
-}
-
-void loop() {
-
+  
+  // Connect to the client server
   WiFiClient client;
-  if (!client.connect(host, httpPort)) {
+  if (!client.connect(SERVER, PORT)) {
     Serial.println("connection failed");
-    error();
     delay(20000);
     return;
   }
 
-  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
-               "Host: " + host + "\r\n" + 
-               "Connection: close\r\n\r\n");
-  
-  
-  HTTPClient http;
-  http.begin("https://domain/post.php");
-  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-  http.POST("from=user%40mail.com&to=user%40mail.com&text=Test+message+post&subject=Alarm%21%21%21");
-  http.writeToStream(&Serial);
-  http.end();
+  client.print(String("POST ") + "/data HTTP/1.1\r\n" +
+    "Host: http://192.168.1.146:8080\r\n" +
+    "Content-Type: application/x-www-form-urlencoded\r\n" +
+    "Content-Length: 23\r\n" +
+    "\r\n" +
+    "temperature=20&light=15\n");
+
+  delay(25000);
 }
- */
 
  
