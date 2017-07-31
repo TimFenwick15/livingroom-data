@@ -24,10 +24,10 @@ function lightToColour(light) {
   return 'black';
 }
 
-function dayLightToColour() {
+// Allow date to be passed as an arg to make this function easier to test
+function dayLightToColour(hour = new Date().getHours()) {
   //blue to black -> #0000FF -> #000000
-  const d = new Date();
-  return `#00${greenness}${Math.floor((Math.sin( Math.PI * d.getHours() / 24 ) ** 2) * intensity).toString(16).padStart(2, '0')}`;
+  return `#00${greenness}${Math.floor((Math.sin( Math.PI * hour / 24 ) ** 2) * intensity).toString(16).padStart(2, '0')}`;
 }
 
 function temperatureToColour(temperature) {
