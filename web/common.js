@@ -9,7 +9,8 @@ const livingroomData = {
 
   // Allow date to be passed as an arg to make this function easier to test
   //blue to black -> #0000FF -> #000000
-  dayLightToColour: (hour = new Date().getHours()) => `#00${greenness}${Math.floor((Math.sin( Math.PI * hour / 24 ) ** 2) * intensity).toString(16).padStart(2, '0')}`,
+  dayLightToColour: (hour = new Date().getHours()) =>
+    `#00${greenness}${Math.floor((Math.sin( Math.PI * hour / 24 ) ** 2) * intensity).toString(16).padStart(2, '0')}`,
 
   temperatureToColour: (temperature) => {
     // red -> blue: #FF0000 -> #0000FF

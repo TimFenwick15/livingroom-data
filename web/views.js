@@ -6,7 +6,6 @@ livingroomData.views = {
     document.getElementsByTagName('body')[0].style.backgroundImage =
       `linear-gradient(${livingroomData.dayLightToColour(light)}, ${livingroomData.temperatureToColour(temperature)})`;
   },
-  updateRecordView: (temperature, light) => {
-    document.getElementById('record').innerHTML = `Record: ${temperature}&deg;C | ${light}au`;
-  }
+  updateRecordView: (temperature, light) =>
+    document.getElementById('record').innerHTML = `Record: ${temperature}&deg;C | ${light}au`
 };
