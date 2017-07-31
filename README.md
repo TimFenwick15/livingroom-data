@@ -27,6 +27,9 @@ Arduino
   https://github.com/esp8266/Arduino/issues/1330
 - .ino files must live in a directory of the same name
 
+JavaScript
+- Trying the structure suggested by http://ozkatz.github.io/structuring-client-side-javascript-code.html
+
 Express
 - If you use port 80, you don't need a port in your URL
 - If you give Express static a path to the static directory, you don't need the directory name in the URL
