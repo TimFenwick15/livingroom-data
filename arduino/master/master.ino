@@ -37,13 +37,15 @@ void loop() {
     return;
   }
 
-  client.print(String("POST ") + "/data HTTP/1.1\r\n" +
-    "Host: http://192.168.1.146:8080\r\n" +
+  String postBody = String("temperature=") + temperature +
+    String("&light=") + light;
+  Serial.println(postBody);
+  client.print(String("POST /data HTTP/1.1\r\n") +
+    "Host: http://" + SERVER + ":" + PORT + "\r\n" +
     "Content-Type: application/x-www-form-urlencoded\r\n" +
-    "Content-Length: 23\r\n" +
-    "\r\n" +
-    "temperature=" + temperature +
-    "&light=" + light +
+    "Content-Length: " + postBody.length() +
+    "\r\n\r\n" +
+    postBody +
     "\n");
 
   delay(30000);
