@@ -15,18 +15,19 @@ void setup() {
     Serial.println(WiFi.status());
     delay(500);
   }
-
   Serial.println("connected");
-  
   Wire.begin();
 }
 
 void loop() {
+  String data = "";
   Wire.requestFrom(8, 5);
   while (Wire.available()) {
     char c = Wire.read();
-    Serial.print(c);
+    data += c;
   }
+  int temperature = atoi (data.substring(0, data.indexOf(" ")).c_str());
+  int light = atoi (data.substring(data.indexOf(" ") + 1).c_str());
   
   // Connect to the client server
   WiFiClient client;
@@ -41,9 +42,11 @@ void loop() {
     "Content-Type: application/x-www-form-urlencoded\r\n" +
     "Content-Length: 23\r\n" +
     "\r\n" +
-    "temperature=20&light=15\n");
+    "temperature=" + temperature +
+    "&light=" + light +
+    "\n");
 
-  delay(25000);
+  delay(30000);
 }
 
  
