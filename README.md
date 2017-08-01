@@ -19,6 +19,18 @@ To run the Arduino code:
 
 Learns/Problems
 
+JavaScript
+- Trying the structure suggested by http://ozkatz.github.io/structuring-client-side-javascript-code.html
+
+Karma Unit Testing
+- Run $ npm i karma karma-mocha karma-chai
+- Run $ node node_modules/karma/bin/karma init my.conf.js
+- Answer the questions chosing mocha as the test framework
+- Edit my.conf.js changing singleRun to true. This causes tests to run without needing a server starting
+- Add 'chai' to the list of frameworks
+- Run $ node_modules/karma/bin/karma start my.conf.js
+- Alternatively, in my.conf.js, set autoWatch to true and singleRun to false to run tests on file changes
+
 Arduino
 - An ESP8266 cannot be an I2C worker; it must be the master. It you try this, you'll see no messages transmitted.
   Thanks to:
@@ -26,9 +38,6 @@ Arduino
   ESP8266 as I2C worker coming soon:
   https://github.com/esp8266/Arduino/issues/1330
 - .ino files must live in a directory of the same name
-
-JavaScript
-- Trying the structure suggested by http://ozkatz.github.io/structuring-client-side-javascript-code.html
 
 Express
 - If you use port 80, you don't need a port in your URL
