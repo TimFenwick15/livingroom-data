@@ -1,10 +1,23 @@
 // ajax goes here
 livingroomData.models = {
-  getData: () => fetch('../data')
-    .then(response => response.json())
-    .catch(() => console.log('/data Fetch error')),
-  getRecordData: () => fetch('../record')
-    .then(response => response.json())
-    .catch(() => console.log('/record Fetch error')),
-  test: () => 'black'
+  getData: () => fetch('data')
+    .then(response => {
+      if (response.status !== 200)
+        throw 'No data';
+      return response.json();
+    })
+    .catch(err => {
+      console.log(`/data error: ${err}`);
+      throw err;
+    }),
+  getRecordData: () => fetch('record')
+    .then(response => {
+      if (response.status !== 200)
+        throw 'No record data';
+      return response.json();
+    })
+    .catch(err => {
+      console.log(`/record Fetch: ${err}`);
+      throw err;
+    })
 }
