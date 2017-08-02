@@ -29,6 +29,7 @@ app.post('/data', (req,res) => {
 
 app.get('/data', (req, res) => {
   console.log(JSON.stringify(data));
+  res.set('Access-Control-Allow-Origin', 'http://localhost:9876');
   res.send(JSON.stringify(data));
 });
 
