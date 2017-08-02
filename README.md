@@ -38,6 +38,11 @@ Karma Unit Testing
 - Karma uses its own webserver to run unit tests. If a Karma unit test makes a network request to your web server, the response will be blocked by default. Dev-tools had an error message to cover this. The GET response needs a header setting to allow this. In Expess:
   res.set('Access-Control-Allow-Origin', 'http://localhost:9876');
 - There's an example of an async unit test on the karma-test branch in web\models.test.js
+- Karma loads and excutes scripts alphabetically. If one script depends on another, it will error. I didn't spot this until late because my app.js was running code from other scripts in a setInterval.
+  There are a couple of solutions to this:
+  - You could list the files to load into Karma in the order you want ( :( )
+  - You could exclude any files from being loaded which would cause problems which is my solution for now since that file doesn't need unit testing
+  - Concatenate scripts as a build step which a large project would probably want to do anyway
 
 Arduino
 - An ESP8266 cannot be an I2C worker; it must be the master. It you try this, you'll see no messages transmitted.
