@@ -18,6 +18,7 @@ app.post('/data', (req,res) => {
   console.log(req.body);
   data.temperature = req.body.temperature;
   data.light = req.body.light;
+  data.time = new Date().toLocaleString();
   res.end('received');
 
   if (req.body.temperature > recordData.temperature)
