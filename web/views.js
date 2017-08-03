@@ -6,7 +6,8 @@ livingroomData.views = {
     //document.getElementById('record').innerHTML += `Last updated: ${time}`;
     console.log(`Update time: ${time}`);
     document.getElementsByTagName('body')[0].style.backgroundImage =
-      `linear-gradient(${livingroomData.dayLightToColour(light)}, ${livingroomData.temperatureToColour(temperature)})`;
+      //`linear-gradient(${livingroomData.dayLightToColour()}, ${livingroomData.temperatureToColour(temperature)})`;
+      `linear-gradient(${livingroomData.timeToColour()}, ${livingroomData.tempToColour(temperature)})`;
   },
   updateRecordView: (temperature, light) =>
     //document.getElementById('record').innerHTML += `Record: ${temperature}&deg;C | ${light}au`
