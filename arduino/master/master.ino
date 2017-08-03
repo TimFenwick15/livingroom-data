@@ -47,6 +47,7 @@ void loop() {
     "\r\n\r\n" +
     postBody +
     "\n");
+  Serial.println(client.status());
 
   delay(30000);
 }
