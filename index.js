@@ -54,5 +54,5 @@ app.get('/record', (req, res) => {
 });
 
 
-app.listen(process.env.PORT || 8080, () => console.log('Listening'));
+app.listen(process.env.PORT || 8080, () => console.log('Listening on ', process.env.PORT);
 
