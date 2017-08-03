@@ -1,29 +1,44 @@
-describe('lightToColour', function() {
-  it('it should return black', function() {
-    assert.equal(livingroomData.lightToColour(), 'black');
+describe('colour', function() {
+
+  const colour = livingroomData.colour();
+  it('It should return a rgb string', function() {
+    assert.equal(colour.toString(), 'rgb(0,0,0)');
   });
+
 });
 
-describe('dayLightToColour', function() {
-  it('It should return #000000 at midnight', function() {
-    assert.equal(livingroomData.dayLightToColour(0), '#000000');
+describe('blend', function() {
+
+  const colour = livingroomData.blend(
+    livingroomData.colour(),
+    livingroomData.colour(255, 255, 255),
+    0.5
+  );
+  it('It should return a could half way between black and white', function() {
+    assert.equal(colour.toString(), 'rgb(127,127,127)');
   });
-  it('It should return #0000ff at midday', function() {
-    assert.equal(livingroomData.dayLightToColour(12), '#0000ff');
-  });
-  it('It should return #0000d9 at 3pm', function() {
-    assert.equal(livingroomData.dayLightToColour(15), '#0000d9');
-  });
+
 });
 
-describe('temperatureToColour', function() {
-  it('It should return #ff0000 at 35 degrees', function() {
-    assert.equal(livingroomData.temperatureToColour(35), '#ff0000');
+describe('timeToColour', function() {
+
+  it('It should return black at midnight', function() {
+    assert.equal(livingroomData.timeToColour(0).toString(), 'rgb(0,0,0)');
   });
-  it('It should return #0000ff at 15 degrees', function() {
-    assert.equal(livingroomData.temperatureToColour(15), '#0000ff');
+  it('It should return blue at midday', function() {
+    assert.equal(livingroomData.timeToColour(12).toString(), 'rgb(0,204,255)');
   });
-  it('It should return #7f007f at 25 degrees', function() {
-    assert.equal(livingroomData.temperatureToColour(25), '#7f007f');
-  });
+
 });
+
+describe('tempToColour', function() {
+
+  it('It should return blue at 15deg', function() {
+    assert.equal(livingroomData.tempToColour(15).toString(), 'rgb(0,204,255)');
+  });
+  it('It should return red at 35deg', function() {
+    assert.equal(livingroomData.tempToColour(35).toString(), 'rgb(255,0,0)');
+  });
+
+});
+
