@@ -41,13 +41,12 @@ void loop() {
     String("&light=") + light;
   Serial.println(postBody);
   client.print(String("POST /data HTTP/1.1\r\n") +
-    "Host: http://" + SERVER + ":" + PORT + "\r\n" +
+    "host: " + SERVER + ":" + PORT + "\r\n" +
     "Content-Type: application/x-www-form-urlencoded\r\n" +
     "Content-Length: " + postBody.length() +
     "\r\n\r\n" +
     postBody +
     "\n");
-  Serial.println(client.status());
 
   delay(30000);
 }
