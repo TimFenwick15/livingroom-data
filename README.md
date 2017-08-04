@@ -13,21 +13,26 @@ To run the client:
 
 To run the Arduino code:
 - Create arduino/worker/credentials.h
-- Write to it (replacing the wifi name and password:
-  #define WIFI_NAME "<wifi-name>"
-  #define WIFI_PASSWORD "<wifi-password>"
-- Use the Arduino IDE to compile and upload the code
+- Write to it (replacing the wifi name and password):
 
-Learns/Problems
+  #define WIFI_NAME "wifi-name"
+  #define WIFI_PASSWORD "wifi-password"
+  #define SERVER "server name"
+  #define PORT port number
 
-JavaScript
+- Use the Arduino IDE to compile and upload the code. I'm running master.ino on a ESP8266 and worker.ino on a Circuit Playground
+
+# Learns/Problems #
+
+## JavaScript ##
 - Trying the structure suggested by http://ozkatz.github.io/structuring-client-side-javascript-code.html
+- Revealing module pattern may be a better choice
 
-Express
+## Express ##
 - If you use port 80, you don't need a port in your URL but Ubuntu didn't like Express listening on port 80
 - If you give Express static a path to the static directory, you don't need the directory name in the URL
 
-Karma Unit Testing
+## Karma Unit Testing ##
 - Run $ npm i karma karma-mocha karma-chai
 - Run $ node node_modules/karma/bin/karma init my.conf.js
 - Answer the questions chosing mocha as the test framework
@@ -37,14 +42,14 @@ Karma Unit Testing
 - Alternatively, in my.conf.js, set autoWatch to true and singleRun to false to run tests on file changes
 - Karma uses its own webserver to run unit tests. If a Karma unit test makes a network request to your web server, the response will be blocked by default. Dev-tools had an error message to cover this. The GET response needs a header setting to allow this. In Expess:
   res.set('Access-Control-Allow-Origin', 'http://localhost:9876');
-- There's an example of an async unit test on the karma-test branch in web\models.test.js
+- Async unit tests need to be contained in a Promise.then(). You need to return the assert statement or use done() after your test. There's an example in web/models.test.js
 - Karma loads and excutes scripts alphabetically. If one script depends on another, it will error. I didn't spot this until late because my app.js was running code from other scripts in a setInterval.
   There are a couple of solutions to this:
   - You could list the files to load into Karma in the order you want ( :( )
   - You could exclude any files from being loaded which would cause problems which is my solution for now since that file doesn't need unit testing
   - Concatenate scripts as a build step which a large project would probably want to do anyway
 
-Arduino
+## Arduino ##
 - An ESP8266 cannot be an I2C worker; it must be the master. It you try this, you'll see no messages transmitted.
   Thanks to:
   http://forum.arduino.cc/index.php?topic=419711.0 
@@ -52,6 +57,6 @@ Arduino
   https://github.com/esp8266/Arduino/issues/1330
 - .ino files must live in a directory of the same name
 
-git
+## git ##
 - Adding .gitignore to your .gitignore is silly
 
