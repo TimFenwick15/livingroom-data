@@ -3,11 +3,11 @@ livingroomData.app = {
   makeNetworkRequests: () => {
     livingroomData.models.getData()
       .then(data => livingroomData.views.updateDataView(data.temperature, data.light, data.time))
-      .catch(console.log);
+      .catch(console.error);
 
     livingroomData.models.getRecordData()
       .then(data => livingroomData.views.updateRecordView(data.temperature, data.light))
-      .catch(console.log);
+      .catch(console.error);
   }
 };
 
