@@ -1,3 +1,4 @@
 node_modules
 credentials.h
 package-lock.json
+mydb.db
