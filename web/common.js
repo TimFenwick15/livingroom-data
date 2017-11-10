@@ -3,7 +3,7 @@ const livingroomData = {};
 
 livingroomData.endpoints = {
   data: 'data',
-  record: 'record'
+  //record: 'record'
 };
 
 livingroomData.colour = (r = 0, g = 0, b = 0) => {
