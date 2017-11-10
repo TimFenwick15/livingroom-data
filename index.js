@@ -9,12 +9,26 @@ const dbFile = 'mydb.db'
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(dbFile);
 const queries = {
-  createData: 'CREATE TABLE data (name TEXT, val INTEGER, min INTEGER, max INTEGER);',
-  insertData: 'INSERT INTO data(name, val, min, max) VALUES("temperature",0,15,35),("light",0,15,35);',
-  updateTemperature: temp => `UPDATE data SET val=${temp} WHERE name="temperature";`,
-  updateLight: light => `UPDATE data SET val=${light} WHERE name="light";`,
+  createData: 'CREATE TABLE data (name TEXT, value INTEGER, units TEXT, min INTEGER, max INTEGER);',
+  insertData:
+    'INSERT INTO data(name, value, units, min, max) VALUES("temperature",0,"&deg;C",15,35),("light",0,"light",15,35),("time","",;',
+  updateTemperature: temp => `UPDATE data SET value=${temp} WHERE name="temperature";`,
+  updateLight: light => `UPDATE data SET value=${light} WHERE name="light";`,
+  updateTime: time => `UPDATE data SET value=${time} WHERE name="time";`,
   selectData: 'SELECT * FROM data;',
 }
+
+app.get('/', (req, res) => {
+  res.header('Content-Type', 'text/html')
+  res.send(
+    `<html><link rel='stylesheet' href='style.css'/></head><body><div id="data"></div>
+      <script src="common.js"></script>
+      <script src="models.js"></script>
+      <script src="views.js"></script>
+      <script src="app.js"></script>
+    </body></html>`
+  )
+})
 
 app.post('/data', (req,res) => {
   console.log(req.body);

@@ -14,5 +14,5 @@ livingroomData.models.get = (resourse, getMethod = fetch) => getMethod(resourse)
 
 livingroomData.models.getData = () => livingroomData.models.get(livingroomData.endpoints.data);
 
-livingroomData.models.getRecordData = () => livingroomData.models.get(livingroomData.endpoints.record);
+//livingroomData.models.getRecordData = () => livingroomData.models.get(livingroomData.endpoints.record);
 

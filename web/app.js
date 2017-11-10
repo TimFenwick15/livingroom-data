@@ -2,11 +2,12 @@
 livingroomData.app = {
   makeNetworkRequests: () => Promise.all([
     livingroomData.models.getData(),
-    livingroomData.models.getRecordData()
+    //livingroomData.models.getRecordData()
   ])
     .then(([data, record]) => {
-      livingroomData.views.updateDataView(data.temperature, data.light, data.time);
-      livingroomData.views.updateRecordView(data.temperature, data.light);
+      //livingroomData.views.updateDataView(data.temperature, data.light, data.time);
+      livingroomData.views.updateDataView(data);
+      //livingroomData.views.updateRecordView(data.temperature, data.light);
     })
     .catch(console.error)
 };
