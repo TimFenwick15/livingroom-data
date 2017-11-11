@@ -6,6 +6,9 @@ app.use(express.static('./web'));
 app.use(bodyParser.urlencoded({extended: false})); 
 
 const dbFile = 'mydb.db'
+const fs = require('fs')
+if (fs.existsSync(dbFile))
+  fs.unlinkSync(dbFile)
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(dbFile);
 const queries = {
@@ -42,19 +45,16 @@ app.get('/data', (req, res) => {
 });
 
 // db.run vs db.exec. We used another for safety
+
 db.on('open', function() {
-  db.all(queries.selectData, (selectErr, rows) => {
-    if (selectErr) {
-      db.run(queries.createData, createErr => {
-        if (createErr)
-          console.error(createErr)
-        db.run(queries.insertData, insertErr => {
-          if (insertErr)
-            console.error(insertErr)
-        })
-      })
-    }
-    const port = process.env.PORT || 8080;
-    app.listen(port, () => console.log(`Listening on ${port}`));
+  db.run(queries.createData, createErr => {
+    if (createErr)
+      console.error(createErr)
+    db.run(queries.insertData, insertErr => {
+      if (insertErr)
+        console.error(insertErr)
+      const port = process.env.PORT || 8080;
+      app.listen(port, () => console.log(`Listening on ${port}`));
+    })
   })
 })
