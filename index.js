@@ -9,10 +9,10 @@ const dbFile = 'mydb.db'
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(dbFile);
 const queries = {
-  createData: 'CREATE TABLE data (name TEXT, value INTEGER, min INTEGER, max INTEGER);',
-  insertData: 'INSERT INTO data(name, value, min, max) VALUES("temperature",0,15,35),("light",0,15,35);',
-  updateTemperature: temp => `UPDATE data SET value=${temp} WHERE name="temperature";`,
-  updateLight: light => `UPDATE data SET value=${light} WHERE name="light";`,
+  createData: 'CREATE TABLE data (name TEXT, val INTEGER, min INTEGER, max INTEGER);',
+  insertData: 'INSERT INTO data(name, val, min, max) VALUES("temperature",0,15,35),("light",0,15,35);',
+  updateTemperature: temp => `UPDATE data SET val=${temp} WHERE name="temperature";`,
+  updateLight: light => `UPDATE data SET val=${light} WHERE name="light";`,
   selectData: 'SELECT * FROM data;',
 }
 
