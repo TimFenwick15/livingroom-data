@@ -10,24 +10,20 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(dbFile);
 const queries = {
   createData: 'CREATE TABLE data (name TEXT, val INTEGER, min INTEGER, max INTEGER);',
-  insertData: 'INSERT INTO data(name, val, min, max) VALUES("temperature",0,15,35),("light",0,15,35);',
-  updateTemperature: temp => `UPDATE data SET val=${temp} WHERE name="temperature";`,
-  updateLight: light => `UPDATE data SET val=${light} WHERE name="light";`,
+  insertData: 'INSERT INTO data(name, val, min, max) VALUES("temperature",0,15,35);INSERT INTO data(name, val, min, max) VALUES("light",0,15,35);',
+  updateData: (temp, light) => `UPDATE data SET val=${temp} WHERE name="temperature";UPDATE data SET val=${light} WHERE name="light";`,
   selectData: 'SELECT * FROM data;',
 }
 
 app.post('/data', (req,res) => {
   console.log(req.body);
   if (req.body.temperature && req.body.light) {
-    db.run(queries.updateTemperature(req.body.temperature), updateErr => {
+    db.run(queries.updateData(req.body.temperature, req.body.light), updateErr => {
       if (updateErr)
         console.error(updateErr)
+      else
+        res.end('received');
     })
-    db.run(queries.updateLight(req.body.light), updateErr => {
-      if (updateErr)
-        console.error(updateErr)
-    })
-    res.end('received');
   }
 });
 
