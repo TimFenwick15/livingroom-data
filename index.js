@@ -36,7 +36,7 @@ app.get('/data', (req, res) => {
   }
   else {
     res
-      .status(503)
+      .status(204)
       .send();
   }
 });
