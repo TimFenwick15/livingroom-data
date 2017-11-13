@@ -53,6 +53,14 @@ app.get('/record', (req, res) => {
   }
 });
 
+app.get('/sample', (req, res) => {
+  data.temperature = 25;
+  data.light = 20;
+  res
+    .status(200)
+    .send();
+});
+
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on ${port}`));
 
