@@ -56,6 +56,8 @@ app.get('/record', (req, res) => {
 app.get('/sample', (req, res) => {
   data.temperature = 25;
   data.light = 20;
+  recordData.temperature = 25;
+  recordData.light = 20;
   res
     .status(200)
     .send();
