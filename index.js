@@ -4,7 +4,8 @@ const bodyParser = require('body-parser')
 
 const data = {
   temperature: 0,
-  light: 0
+  light: 0,
+  time: ''
 };
 const recordData = {
   temperature: 0,
