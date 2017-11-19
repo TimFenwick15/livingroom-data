@@ -7,6 +7,8 @@ char wireData[6];
 
 void setup() {
   Serial.begin(9600);
+
+  // Wire is a library for I2C communication. 8 is the channel number the master and worker share
   Wire.begin(8);
   Wire.onRequest(requestEvent);
 }

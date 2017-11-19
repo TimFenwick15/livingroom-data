@@ -28,6 +28,10 @@ To run the Arduino code:
 
 ## JavaScript ##
 - Trying the structure suggested by http://ozkatz.github.io/structuring-client-side-javascript-code.html
+  - app.js starts the app
+  - common.js contains helper functions
+  - models.js is an interface for getting data
+  - views.js contains all DOM interactions
 - Revealing module pattern may be a better choice
 
 ## Express ##

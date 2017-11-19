@@ -20,23 +20,25 @@ void setup() {
 }
 
 void loop() {
+  // Request data from the worker using Wire, a library for I2C communication
   String data = "";
   Wire.requestFrom(8, 5);
   while (Wire.available()) {
     char c = Wire.read();
     data += c;
   }
+
+  // Parse the data and convert to int
   int temperature = atoi (data.substring(0, data.indexOf(" ")).c_str());
   int light = atoi (data.substring(data.indexOf(" ") + 1).c_str());
   
-  // Connect to the client server
+  // Connect to the client web server and POST the data
   WiFiClient client;
   if (!client.connect(SERVER, PORT)) {
     Serial.println("connection failed");
     delay(20000);
     return;
   }
-
   String postBody = String("temperature=") + temperature +
     String("&light=") + light;
   Serial.println(postBody);
